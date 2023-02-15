@@ -26,6 +26,10 @@ public class Linea {
         return "{" + "punto1=" + punto1 + ", punto2=" + punto2 + '}';
     }
     
+    public double pendiente(Punto unPunto1, Punto unPunto2){
+        return 0;
+    }
+    
     
     
     

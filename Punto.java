@@ -46,19 +46,18 @@ public class Punto {
         return Math.sqrt(Math.pow((x1-x),2) + Math.pow((y1 - y),2));
     }
     
-    public double distancia(){
-        return distancia(0,0);
-    }
-    
     public double distancia(Punto unPunto){
         return distancia(unPunto.getX(), unPunto.getY());
     }
     
+    public double distancia(){
+        return distancia(0,0);
+    }
+    
     private void voltear(){
-        int valorX = x;
-        this.x = -this.y;
-        this.y = -valorX;
-        
+        int almacenX = x;
+        this.x = -y;
+        this.y = -almacenX;
     }
     
     private int distanciaManhattan(Punto unPunto){
@@ -74,11 +73,12 @@ public class Punto {
     }
     
     
-    private double pendiente(Punto unPunto){
+    public double pendiente(Punto unPunto){
         double resultado = 0;
         
-        if(x!=unPunto.getX())
+        if(x!=unPunto.getX() && y!=unPunto.getY()){
             resultado = (unPunto.getY() - y) / (unPunto.getX() - x);
+        }
         
         return resultado;
     }
@@ -86,12 +86,11 @@ public class Punto {
     private boolean esColineal(Punto unPunto1, Punto unPunto2){
         boolean esColineal = false;
         
-        double primeraPendiente = Math.round(this.pendiente(unPunto1)*10000.0)/10000.0;
-        double segundaPendiente = Math.round(unPunto1.pendiente(unPunto2)*10000.0)/10000.0;
+        double pendiente1 = Math.round(this.pendiente(unPunto1)*10000.0)/1000.0;
+        double pendiente2 = Math.round(unPunto1.pendiente(unPunto2)*10000.0)/1000.0;
         
-        if(primeraPendiente!=segundaPendiente)
-            esColineal = true;
-        else if(this.x != unPunto1.getX() && this.x != unPunto2.getX())
+        if(unPunto1.getX() == unPunto2.getX() && this.x == unPunto1.getX() 
+                || pendiente1 == pendiente2)
             esColineal = true;
         
         return esColineal;
@@ -113,24 +112,12 @@ public class Punto {
         System.out.println("distancia de p1 a coordenadas: " + p1.distancia(5,6));
         System.out.println("del p1 al origen: " + p1.distancia());
         
-        //-------------------
-        
         Punto p3 = new Punto(5,-3);
         p3.voltear();
         System.out.println(p3);
-        
-        System.out.println("distancia Manhattan: " + 
-                p3.distanciaManhattan(new Punto(5,0)));
-        
-        if(p3.esVertical(new Punto(3,2)))//porque ahora la x de p3 es 3
-            System.out.println("Las coordenadas x son iguales");
-        else
-            System.out.println("No son iguales");
-        
-        
-        double pendiente = p3.pendiente(p2);
-        if(pendiente!=0)
-            System.out.println("pendiente: " + pendiente);
+        System.out.println(p3.esColineal(p1, p2));
+        System.out.println(p3.distanciaManhattan(p2));
+        System.out.println("Es vertical: " + p3.esVertical(p2));
         
         
     }
