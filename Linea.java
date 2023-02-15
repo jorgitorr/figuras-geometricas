@@ -26,11 +26,17 @@ public class Linea {
         return "{" + "punto1=" + punto1 + ", punto2=" + punto2 + '}';
     }
     
-    public double pendiente(Punto unPunto1, Punto unPunto2){
-        return 0;
+    public double pendiente(){
+        return punto1.pendiente(punto2);
+    }
+    
+    public boolean esColineal(Punto unPunto){
+        return unPunto.esColineal(punto1, punto2);
     }
     
     
-    
-    
+    public static void main(String[] args) {
+        
+    }
+
 }

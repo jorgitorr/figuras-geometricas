@@ -60,7 +60,7 @@ public class Punto {
         this.y = -almacenX;
     }
     
-    private int distanciaManhattan(Punto unPunto){
+    public int distanciaManhattan(Punto unPunto){
         return Math.abs(this.x - unPunto.getX()) + Math.abs(this.y - unPunto.getY());
     }
     
@@ -83,7 +83,7 @@ public class Punto {
         return resultado;
     }
     
-    private boolean esColineal(Punto unPunto1, Punto unPunto2){
+    public boolean esColineal(Punto unPunto1, Punto unPunto2){
         boolean esColineal = false;
         
         double pendiente1 = Math.round(this.pendiente(unPunto1)*10000.0)/1000.0;
