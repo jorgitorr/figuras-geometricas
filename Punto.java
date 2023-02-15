@@ -55,7 +55,9 @@ public class Punto {
     }
     
     private void voltear(){
-        distancia(y,x);
+        int almacenX = x;
+        this.x = -y;
+        this.y = -almacenX;
     }
     
     private int distanciaManhattan(Punto unPunto){
@@ -64,7 +66,7 @@ public class Punto {
     
     private boolean esVertical(Punto unPunto){
         boolean iguales = false;
-        if(x==unPunto.getX())
+        if(this.x==unPunto.getX())
             iguales = true;
         
         return iguales;
@@ -82,8 +84,14 @@ public class Punto {
     }
     
     private boolean esColineal(Punto unPunto1, Punto unPunto2){
-        //tengo que hacerlo
         boolean esColineal = false;
+        
+        double pendiente1 = Math.round(this.pendiente(unPunto1)*10000.0)/1000.0;
+        double pendiente2 = Math.round(unPunto1.pendiente(unPunto2)*10000.0)/1000.0;
+        
+        if(unPunto1.getX() == unPunto2.getX() && this.x == unPunto1.getX() 
+                || pendiente1 == pendiente2)
+            esColineal = true;
         
         return esColineal;
     }
@@ -103,6 +111,14 @@ public class Punto {
         
         System.out.println("distancia de p1 a coordenadas: " + p1.distancia(5,6));
         System.out.println("del p1 al origen: " + p1.distancia());
+        
+        Punto p3 = new Punto(5,-3);
+        p3.voltear();
+        System.out.println(p3);
+        System.out.println(p3.esColineal(p1, p2));
+        System.out.println(p3.distanciaManhattan(p2));
+        System.out.println("Es vertical: " + p3.esVertical(p2));
+        
         
     }
 
