@@ -23,7 +23,7 @@ public class Linea {
 
     @Override
     public String toString() {
-        return "Linea{" + "punto1=" + punto1 + ", punto2=" + punto2 + '}';
+        return "{" + "punto1=" + punto1 + ", punto2=" + punto2 + '}';
     }
     
     
