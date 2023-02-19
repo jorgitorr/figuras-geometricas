@@ -37,39 +37,55 @@ public class Rectangulo {
     }
     
     
-    
-    
     public boolean contiene(int x, int y){
         boolean interior = false;
-        if(x<ancho && y<alto){
+        if(x<ancho && y<alto)
             interior = true;
-        }
+   
         return interior;
     }
     
     
     public boolean contiene(Punto unPunto){
         boolean interior = false;
-        if(esqI.distanciaManhattan(unPunto)>=0){
+        if(esqI.distanciaManhattan(unPunto)>=0)
             interior = true;
-        }
+        
         return interior;
     }
     
     public boolean contiene(Rectangulo rectangulo){
         boolean esContenido = false;
-        if(rectangulo.getAncho()<this.alto && rectangulo.getAlto()<this.alto)
+        if(rectangulo.getAncho()<this.ancho && rectangulo.getAlto()<this.alto)
             esContenido = true;
         
         return esContenido;
     }
     
     public Rectangulo union(Rectangulo rectangulo){
-        return rectangulo;
+        Rectangulo rectanguloDevuelto;
+        
+        if(this.contiene(rectangulo))
+            rectanguloDevuelto = this;
+        else
+            rectanguloDevuelto = rectangulo;
+        
+        return rectanguloDevuelto;
     }
     
     public Rectangulo interseccion(Rectangulo rectangulo){
-        return rectangulo;
+        Rectangulo rectanguloDevuelto;
+        int alto, ancho;
+        
+        if(this.contiene(rectangulo)){
+            alto = this.getAlto() + rectangulo.getAlto();
+            ancho = this.getAncho() + rectangulo.getAncho();
+            rectanguloDevuelto = new Rectangulo(esqI, ancho, alto);
+        }else{
+            rectanguloDevuelto = new Rectangulo(esqI, 0, 0);
+        }
+        
+        return rectanguloDevuelto;
     }
     
     
