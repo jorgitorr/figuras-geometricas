@@ -39,16 +39,16 @@ public class Rectangulo {
     
     public boolean contiene(int x, int y){
         boolean interior = false;
-        if(x<ancho && y<alto)
+        if((esqI.getX()+x)<ancho && (esqI.getX()+y)<alto)
             interior = true;
-   
+        
         return interior;
     }
     
     
     public boolean contiene(Punto unPunto){
         boolean interior = false;
-        if(esqI.distanciaManhattan(unPunto)>=0)
+        if(contiene(unPunto.getX(), unPunto.getY()))
             interior = true;
         
         return interior;
@@ -63,29 +63,29 @@ public class Rectangulo {
     }
     
     public Rectangulo union(Rectangulo rectangulo){
-        Rectangulo rectanguloDevuelto;
         
-        if(this.contiene(rectangulo))
-            rectanguloDevuelto = this;
-        else
-            rectanguloDevuelto = rectangulo;
+        int newX      = Math.min(esqI.getX(), rectangulo.getAncho());
+        int newY      = Math.min(esqI.getY(), rectangulo.getAlto());
+        int newWidth  = Math.max(esqI.getX() + ancho - newX, esqI.getX() + rectangulo.getAncho() - newX);
+        int newHeight = Math.max(esqI.getY() + alto - newY, esqI.getY() + rectangulo.getAlto() - newY);
         
-        return rectanguloDevuelto;
+        return new Rectangulo(newX, newY, newWidth, newHeight);
     }
     
     public Rectangulo interseccion(Rectangulo rectangulo){
-        Rectangulo rectanguloDevuelto;
-        int alto, ancho;
+        Rectangulo rect;
+        int newX      = Math.min(esqI.getX(), rectangulo.getAncho());
+        int newY      = Math.min(esqI.getY(), rectangulo.getAlto());
+        int newWidth  = Math.max(esqI.getX() + ancho - newX, esqI.getX() + rectangulo.getAncho() - newX);
+        int newHeight = Math.max(esqI.getY() + alto - newY, esqI.getY() + rectangulo.getAlto() - newY);
         
-        if(this.contiene(rectangulo)){
-            alto = this.getAlto() + rectangulo.getAlto();
-            ancho = this.getAncho() + rectangulo.getAncho();
-            rectanguloDevuelto = new Rectangulo(esqI, ancho, alto);
-        }else{
-            rectanguloDevuelto = new Rectangulo(esqI, 0, 0);
-        }
         
-        return rectanguloDevuelto;
+        if (newWidth <= 0 || newHeight <= 0)
+            rect = null;
+        else
+            rect = new Rectangulo(newX, newY, newWidth, newHeight);
+        
+        return rect;
     }
     
     

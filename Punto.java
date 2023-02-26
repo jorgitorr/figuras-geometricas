@@ -61,12 +61,12 @@ public class Punto {
     }
     
     public int distanciaManhattan(Punto unPunto){
-        return Math.abs(this.x - unPunto.getX()) + Math.abs(this.y - unPunto.getY());
+        return Math.abs(x - unPunto.getX()) + Math.abs(y - unPunto.getY());
     }
     
     private boolean esVertical(Punto unPunto){
         boolean iguales = false;
-        if(this.x==unPunto.getX())
+        if(x==unPunto.getX())
             iguales = true;
         
         return iguales;
